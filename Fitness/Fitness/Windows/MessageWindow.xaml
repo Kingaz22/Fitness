@@ -1,0 +1,21 @@
+﻿<Window x:Class="Fitness.Windows.MessageWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fitness.Windows"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Height="150" Width="340">
+    <Grid>
+        <StackPanel>
+            <TextBlock  Name="Label" Margin="10" TextWrapping="WrapWithOverflow" Text="Введите номер дня загружаемых данных из файла "></TextBlock>
+            <TextBox Name="TextBox" PreviewTextInput="TextBox_PreviewTextInput" MaxLength="2" Margin="20, 0, 20,0" FontSize="15"/>
+            <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" >
+                <Button Margin="5" Content="OK" Width="150" IsDefault="True" Click="Accept_Click"/>
+                <Button Margin="5" Content="Отмена" Width="150" IsCancel="True"/>
+
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,85 @@
+﻿<Window x:Class="Fitness.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Fitness"
+        xmlns:wpf="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        mc:Ignorable="d"
+        Title="Анализ количества пройденных шагов" Height="600" Width="1300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu Height="25" VerticalAlignment="Top" Grid.Row="0" Grid.ColumnSpan="3">
+            <MenuItem Header="Загрузить данные" Command="{Binding LoadData}"/>
+            <MenuItem Header="Экспорт" Command="{Binding ExportData}" CommandParameter="{Binding SelectedItems, ElementName=ListView}" ToolTip="Экспорт выделенных данных"/>
+            <MenuItem Header="Очистить" ToolTip="Очистить все данные" Command="{Binding ClearData}"/>
+        </Menu>
+        <GridSplitter Grid.Column="1" Grid.Row="1" ShowsPreview="False" Width="3" HorizontalAlignment="Center" VerticalAlignment="Stretch" />
+        <ListView Name="ListView" ItemsSource="{Binding User}" Grid.Column="0" Grid.Row="1" SelectionMode="Extended" 
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}" Width="420">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ФИО">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=User}" TextWrapping="Wrap" Foreground="{Binding Color}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="60">
+                        <GridViewColumnHeader HorizontalContentAlignment="Center" >
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Среднее кол. шагов"/>
+                        </GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=AverageSteps}" Foreground="{Binding Color}"/> 
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="85">
+                        <GridViewColumnHeader HorizontalContentAlignment="Center" >
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Минимальное кол. шагов"/>
+                        </GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=MinSteps}" Foreground="{Binding Color}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Width="90">
+                        <GridViewColumnHeader HorizontalContentAlignment="Center" >
+                            <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Максимальное кол. шагов"/>
+                        </GridViewColumnHeader>
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Path=MaxSteps}" Foreground="{Binding Color}"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <wpf:CartesianChart Margin="5" Series="{Binding SeriesCollection, Mode=TwoWay}" Grid.Column="2" Grid.Row="1" >
+            <wpf:CartesianChart.AxisY>
+                <wpf:Axis Title="Шаги"  MinValue="0"></wpf:Axis>
+            </wpf:CartesianChart.AxisY>
+            <wpf:CartesianChart.AxisX>
+                <wpf:Axis Title="Дни" Separator="{Binding Separator}" MinValue="1"></wpf:Axis>
+            </wpf:CartesianChart.AxisX>
+        </wpf:CartesianChart>
+
+    </Grid>
+</Window>

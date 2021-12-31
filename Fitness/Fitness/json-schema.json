@@ -1,0 +1,35 @@
+{
+  "type": "array",
+  "items": {
+    "type": [
+      "object",
+      "null"
+    ],
+    "properties": {
+      "Rank": {
+        "type": "integer"
+      },
+      "User": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "Status": {
+        "type": [
+          "string",
+          "null"
+        ]
+      },
+      "Steps": {
+        "type": "integer"
+      }
+    },
+    "required": [
+      "Rank",
+      "User",
+      "Status",
+      "Steps"
+    ]
+  }
+}
